@@ -292,12 +292,12 @@ static int csc452_getattr(const char *path, struct stat *stbuf)
         stbuf->st_mode = S_IFDIR | 0755;
         stbuf->st_nlink = 2;
     }
-        // Path is directory
+    // Path is directory
     else if (file_type == 0 && check_directory(directory) == 1) {
         stbuf->st_mode = S_IFDIR | 0755;
         stbuf->st_nlink = 2;
     }
-        // Path is file
+    // Path is file
     else if (file_type >= 1 && (fsize = check_file_exists(directory, file, extension)) != -1) {
         stbuf->st_mode = S_IFREG | 0666;
         stbuf->st_nlink = 2;
@@ -316,7 +316,6 @@ static int csc452_getattr(const char *path, struct stat *stbuf)
 static int csc452_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
                           off_t offset, struct fuse_file_info *fi)
 {
-
     //Since we're building with -Wall (all warnings reported) we need
     //to "use" every parameter, so let's just cast them to void to
     //satisfy the compiler
@@ -345,7 +344,7 @@ static int csc452_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
             }
         }
     }
-        // Path is directory
+    // Path is directory
     else if (fileOrDir == 0 && check_directory(directory) == 1) {
         filler(buf, ".", NULL, 0);
         filler(buf, "..", NULL, 0);
@@ -360,7 +359,7 @@ static int csc452_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
                 if (strcmp(entry.files[i].fext, "\0") == 0) {
                     filler(buf, entry.files[i].fname, NULL, 0);
                 }
-                    // With extention
+                // With extention
                 else {
                     char fullFileName[MAX_FILENAME + MAX_EXTENSION + 2];
                     strcpy(fullFileName, entry.files[i].fname);
