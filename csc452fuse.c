@@ -79,7 +79,7 @@ typedef struct csc452_disk_block csc452_disk_block;
 #define FAT_BLOCK_SIZE (FAT_BLOCK_COUNT * BLOCK_SIZE)
 #define FAT_ENTRIES ((FAT_BLOCK_SIZE / sizeof(short)) - FAT_BLOCK_COUNT)
 
-/*
+/**
  * opens the disk and reads in the root
  */
 void open_root(csc452_root_directory *root)
@@ -94,9 +94,14 @@ void open_root(csc452_root_directory *root)
     }
 }
 
-// This function takes in a directory name and will search the disk
-// for the directory, fill the entry parameter and return the start
-// block of the directory
+/**
+ * takes in a directory name and will search the disk
+ * for the directory, fill the entry parameter and
+ * return the start block of the directory
+ * @param directory
+ * @param directoryName
+ * @return the start block of the directory
+ */
 long get_directory(csc452_directory_entry *directory, char *directoryName)
 {
     long startBlock = 0;
@@ -122,8 +127,6 @@ long get_directory(csc452_directory_entry *directory, char *directoryName)
     return startBlock;
 }
 
-// This function will always check_file before calling get_file
-// returning the Start Block of that file
 int get_file(char *directory, char *file, char *extension)
 {
     csc452_directory_entry entry;
@@ -139,10 +142,6 @@ int get_file(char *directory, char *file, char *extension)
     return -1;
 }
 
-/**
- * This function will always check_file before calling get_file
- * returning the Start Block of that file
- */
 int check_directory(char *directory)
 {
     int flag = 0;
@@ -246,7 +245,7 @@ long get_fat_block()
 
 
 /**
- * This function takes in a value and block address. It sets that address' value to value
+ * takes in a value and block address. It sets that address' value to value
  */
 void set_fat_block(long blockAddr, short val)
 {
